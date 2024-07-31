@@ -12,15 +12,19 @@ const TopNavbar = () => {
   return (
     <Container fluid className="sticky-top">
       <Navbar bg="light" data-bs-theme="light">
-        <Container>
+        <Container fluid>
           <Navbar.Brand href="#home">
             <Image width="120px" src={aerchain_logo}></Image>
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="#home">Module</Nav.Link>
-            <Nav.Link href="#features">Purchase order</Nav.Link>
+            <Nav.Link className="dropdown-toggle" href="#features">
+              Purchase order
+            </Nav.Link>
             <Nav.Link href="#pricing">Invoices</Nav.Link>
-            <Nav.Link href="#pricing">Budgets</Nav.Link>
+            <Nav.Link className="dropdown-toggle" href="#pricing">
+              Budgets
+            </Nav.Link>
           </Nav>
           <Nav className="text-right">
             <Nav.Link href="#pricing">

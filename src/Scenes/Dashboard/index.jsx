@@ -1,63 +1,104 @@
-import React from "react";
-import { Container, Col, Row } from "react-bootstrap";
-import TopNavbar from "../../Components/TopNavbar";
+import React, { useEffect, useState } from "react";
+import { Container, Col, Row, Button } from "react-bootstrap";
+import StatsContainer from "./StatsContainer";
+import DataTable from "react-data-table-component";
+import { data } from "../../../frontendAssignment.json";
 const index = () => {
-  const TripStats = () => {
+  const [dataPending, setDataPending] = useState(true);
+  const [selectedRow, setSelectedRow] = useState({});
+  const [deliveredStatusCount, setDeliveredStatusCount] = useState(0);
+  const [inTransitStatusCount, setInTransitStatusCount] = useState(0);
+
+  useEffect(() => {
+    setDataPending(false);
+    const deliveredStatus = data.filter(
+      (item) => item.currentStatusCode === "DEL"
+    ).length;
+    setDeliveredStatusCount(deliveredStatus);
+    const inTransitStatus = data.filter(
+      (item) => item.currentStatusCode === "INT"
+    ).length;
+    setInTransitStatusCount(inTransitStatus);
+  }, []);
+  const AddTripContainer = () => {
     return (
-      <Container className="h-5" style={{ background: "yellow" }}>
-        <Row>
-          <Col md={8} style={{ alignContent: "space-between" }}>
-            <Row>
-              <Col md={6}>
-                <div>Total Trips</div>
-                <div>
-                  <h4> 18033</h4>
-                </div>
-              </Col>
-              <Col md={2}>
-                <div>Delivered</div>
-                <div>
-                  <h4 className="text-"> 18033</h4>
-                </div>
-              </Col>
-              <Col md={2}>Donut</Col>
-              <Col md={2}>
-                <div className="text-danger"> Delayed</div>
-                <div>
-                  <h6> 18033</h6>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-          <Col
-            md={4}
-            style={{
-              borderLeft: "1px solid red",
-              alignContent: "space-between",
-            }}
-          >
-            <Row>
-              <Col>
-                <div>In Transit</div>
-                <div>
-                  <h6> 18033</h6>
-                </div>
-              </Col>
-              <Col>
-                <div>Delivered</div>
-                <div>
-                  <h6 className="align-text-bottom"> 18033</h6>
-                </div>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
+      <div className="d-flex justify-content-between m-3">
+        <div className="d-flex align-items-center">
+          <h6>Trip List</h6>
+        </div>
+        <div className="d-flex align-items-center">
+          <Button variant="">Update Status</Button>
+          <Button className="ml-2 mr-2 text-nowrap">Add Trip</Button>
+        </div>
+      </div>
     );
   };
+
+  const columns = [
+    {
+      name: "Trip id",
+      selector: (row) => row.tripId,
+    },
+    {
+      name: "Transporter",
+      selector: (row) => row.transporter,
+    },
+    {
+      name: "Source",
+      selector: (row) => row.source,
+      sortable: true,
+    },
+    {
+      name: "Destination",
+      selector: (row) => row.dest,
+      sortable: true,
+    },
+    {
+      name: "Phone",
+      selector: (row) => row.phoneNumber,
+      sortable: true,
+    },
+    {
+      name: "ETA",
+      selector: (row) => row.etaDays,
+      sortable: true,
+    },
+    {
+      name: "Distance Remaining",
+      selector: (row) => row.distanceRemaining,
+      sortable: true,
+    },
+    {
+      name: "Trip Status",
+      selector: (row) => row.currenStatus,
+      sortable: true,
+    },
+    {
+      name: "TAT Status",
+      selector: (row) => row.currentStatus,
+      sortable: true,
+    },
+  ];
+  const handleSelected = ({ selectedRows }) => {
+    // You can set state or dispatch with something like Redux so we can use the retrieved data
+    setSelectedRow(selectedRows[0]);
+  };
+
   return (
-    <Container>
-      <TripStats />
+    <Container fluid>
+      <StatsContainer
+        totaltrips={data.length}
+        deliveredStatus={deliveredStatusCount}
+        inTransitStatus={inTransitStatusCount}
+      />
+      <AddTripContainer />
+      <DataTable
+        columns={columns}
+        data={data}
+        selectableRows
+        progressPending={dataPending}
+        onSelectedRowsChange={handleSelected}
+      />
     </Container>
   );
 };
