@@ -1,6 +1,7 @@
 import { Navbar, Container, Nav, Image } from "react-bootstrap";
 import React from "react";
 import aerchain_logo from "../assets/images/aerchain_logo.png";
+import gmail_logo from "../assets/images/gmail_logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleQuestion,
@@ -36,7 +37,9 @@ const TopNavbar = () => {
             <Nav.Link href="#pricing">
               <FontAwesomeIcon icon={faGear} color="blue" />
             </Nav.Link>
-            <Nav.Link href="#pricing">Gmail</Nav.Link>
+            <Nav.Link className="dropdown-toggle" href="#pricing">
+              <Image width={95} src={gmail_logo}></Image>
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>

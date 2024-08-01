@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Container, Col, Row, Button } from "react-bootstrap";
+import { Container, Col, Row, Button, Modal } from "react-bootstrap";
 import StatsContainer from "./StatsContainer";
+import AddEditTrip from "./AddEditTrip";
 import DataTable from "react-data-table-component";
 import { data } from "../../../frontendAssignment.json";
 const index = () => {
@@ -20,24 +21,14 @@ const index = () => {
     ).length;
     setInTransitStatusCount(inTransitStatus);
   }, []);
-  const AddTripContainer = () => {
-    return (
-      <div className="d-flex justify-content-between m-3">
-        <div className="d-flex align-items-center">
-          <h6>Trip List</h6>
-        </div>
-        <div className="d-flex align-items-center">
-          <Button variant="">Update Status</Button>
-          <Button className="ml-2 mr-2 text-nowrap">Add Trip</Button>
-        </div>
-      </div>
-    );
-  };
 
   const columns = [
     {
       name: "Trip id",
       selector: (row) => row.tripId,
+      style: {
+        color: "blue",
+      },
     },
     {
       name: "Transporter",
@@ -72,6 +63,9 @@ const index = () => {
       name: "Trip Status",
       selector: (row) => row.currenStatus,
       sortable: true,
+      style: {
+        color: (row) => (row.currentStatusCode === "BKD" ? "orange" : "blue"),
+      },
     },
     {
       name: "TAT Status",
@@ -91,7 +85,7 @@ const index = () => {
         deliveredStatus={deliveredStatusCount}
         inTransitStatus={inTransitStatusCount}
       />
-      <AddTripContainer />
+      <AddEditTrip />
       <DataTable
         columns={columns}
         data={data}
