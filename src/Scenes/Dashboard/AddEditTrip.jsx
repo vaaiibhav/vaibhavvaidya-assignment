@@ -2,9 +2,55 @@ import React, { useState } from "react";
 import { Container, Col, Row, Button, Modal } from "react-bootstrap";
 
 const AddEditTrip = () => {
-  const [modalShow, setModalShow] = useState(false);
-  // Modal Component
-  const ModalViewer = (props) => {
+  const [addModalShow, setAddModalShow] = useState(false);
+  const [updateModalShow, setUpdateModalShow] = useState(false);
+  const [updateVariant, setUpdateVariant] = useState("");
+  // Update Trip Modal Component
+  const UpdateTripModalViewer = (props) => {
+    return (
+      <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+            Update Trip
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="grid-example">
+          <Container>
+            <Row>
+              <Col>
+                <span style={{ color: "red" }}>* </span> Transporter
+                <div>
+                  <select type="text" placeholder="transporter">
+                    <option value="Blue dart">Blue dart</option>
+                    <option value="DTDC">DTDC</option>
+                    <option value="Delhivery">Delhivery</option>
+                    <option value="Merks">Merks</option>
+                  </select>
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <span style={{ color: "red" }}>* </span> Time
+                <div>
+                  <input type="text" placeholder="Time" />
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="dark" onClick={props.onHide}>
+            Cancel
+          </Button>
+          <Button onClick={props.onHide}>Update Status</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  };
+
+  //Add Trip Modal Component
+  const AddTripModalViewer = (props) => {
     return (
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
         <Modal.Header closeButton>
@@ -64,9 +110,19 @@ const AddEditTrip = () => {
           <h6>Trip List</h6>
         </div>
         <div className="d-flex align-items-center">
-          <Button variant="">Update Status</Button>
           <Button
-            onClick={() => setModalShow(true)}
+            variant=""
+            onClick={() => {
+              setUpdateModalShow(true);
+            }}
+            className="ml-2 mr-2 text-nowrap"
+          >
+            Update Status
+          </Button>
+          <Button
+            onClick={() => {
+              setAddModalShow(true);
+            }}
             className="ml-2 mr-2 text-nowrap"
           >
             Add Trip
@@ -78,7 +134,14 @@ const AddEditTrip = () => {
   return (
     <>
       <AddTripContainer />
-      <ModalViewer show={modalShow} onHide={() => setModalShow(false)} />
+      <AddTripModalViewer
+        show={addModalShow}
+        onHide={() => setAddModalShow(false)}
+      />
+      <UpdateTripModalViewer
+        show={updateModalShow}
+        onHide={() => setUpdateModalShow(false)}
+      />
     </>
   );
 };

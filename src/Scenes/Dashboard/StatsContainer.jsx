@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Col, Row } from "react-bootstrap";
-
+import { Progress } from "react-sweet-progress";
+import "react-sweet-progress/lib/style.css";
 const StatsContainer = (props) => {
   return (
     <Container className="h-5 mt-4" fluid>
@@ -19,7 +20,23 @@ const StatsContainer = (props) => {
                 <h4 className="text-">{props.deliveredStatus}</h4>
               </div>
             </Col>
-            <Col md={2}>Donut</Col>
+            <Col md={2}>
+              <div className="d-flex justify-content-center">
+                <Progress
+                  type="circle"
+                  theme={{
+                    active: {
+                      color: "rgb(46, 204, 113)",
+                    },
+                  }}
+                  width={60}
+                  percent={80}
+                />
+              </div>
+              <div>
+                Ontime: <span style={{ color: "blue" }}>1,23,456</span>
+              </div>
+            </Col>
             <Col md={2}>
               <div className="text-danger">
                 <h6>Delayed</h6>

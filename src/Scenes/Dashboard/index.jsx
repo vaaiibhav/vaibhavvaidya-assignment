@@ -4,6 +4,7 @@ import StatsContainer from "./StatsContainer";
 import AddEditTrip from "./AddEditTrip";
 import DataTable from "react-data-table-component";
 import { data } from "../../../frontendAssignment.json";
+
 const index = () => {
   const [dataPending, setDataPending] = useState(true);
   const [selectedRow, setSelectedRow] = useState({});
