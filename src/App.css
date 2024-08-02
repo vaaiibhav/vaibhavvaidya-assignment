@@ -3,3 +3,17 @@
   height: 100%;
   margin: 0 auto;
 }
+input {
+  background-color: white;
+  border-radius: 7px 7px 7px 7px;
+  padding: 2%;
+  border: 1px solid gray;
+}
+select {
+  color: black;
+  width: 92%;
+  background-color: white;
+  border-radius: 7px 7px 7px 7px;
+  padding: 2%;
+  border: 1px solid gray;
+}

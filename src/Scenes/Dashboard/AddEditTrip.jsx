@@ -3,7 +3,7 @@ import { Container, Col, Row, Button, Modal } from "react-bootstrap";
 
 const AddEditTrip = () => {
   const [modalShow, setModalShow] = useState(false);
-
+  // Modal Component
   const ModalViewer = (props) => {
     return (
       <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
@@ -19,23 +19,30 @@ const AddEditTrip = () => {
               </Col>
               <Col>
                 <span style={{ color: "red" }}>* </span> Transporter
-                <input type="text" placeholder="trip id" />
+                <div>
+                  <select type="text" placeholder="transporter">
+                    <option value="Blue dart">Blue dart</option>
+                    <option value="DTDC">DTDC</option>
+                    <option value="Delhivery">Delhivery</option>
+                    <option value="Merks">Merks</option>
+                  </select>
+                </div>
               </Col>
             </Row>
             <Row>
               <Col>
                 <span style={{ color: "red" }}>* </span> Source
-                <input type="text" placeholder="trip id" />
+                <input type="text" placeholder="source" />
               </Col>
               <Col>
                 <span style={{ color: "red" }}>* </span> Destination
-                <input type="text" placeholder="trip id" />
+                <input type="text" placeholder="destination" />
               </Col>
             </Row>
             <Row>
               <Col>
                 <span style={{ color: "red" }}>* </span> Phone
-                <input type="phone" placeholder="trip id" />
+                <input type="phone" placeholder="phone " />
               </Col>
               <Col> </Col>
             </Row>
